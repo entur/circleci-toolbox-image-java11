@@ -1,0 +1,49 @@
+version: 2
+jobs:
+  shellcheck:
+    docker:
+      - image: nlknguyen/alpine-shellcheck:v0.4.6
+    steps:
+      - checkout
+      - run:
+          name: Check Scripts
+          command: |
+            find . -type f -name '*.sh' | wc -l
+            find . -type f -name '*.sh' | xargs shellcheck --external-sources
+  build:
+    docker:
+      # We do not need node for building this image. But we need other things this provides.
+      - image: circleci/node:10
+        user: root
+    environment:
+      DEBIAN_FRONTEND: "noninteractive"
+    steps:
+      - checkout
+      - run: tools/gcloud_install.sh
+      - run:
+          name: GCP Authenticate
+          command: |
+            echo 'export GCLOUD_SERVICE_KEY="$GCLOUD_SERVICE_KEY"' >> $BASH_ENV
+            tools/gcp_authenticate.sh
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Docker login
+          command: |
+            echo 'export GCLOUD_SERVICE_KEY="$GCLOUD_SERVICE_KEY"' >> $BASH_ENV
+            tools/docker_login.sh
+      - run:
+          name: Docker build and push
+          command: |
+            echo 'export CIRCLE_PROJECT_REPONAME="$CIRCLE_PROJECT_REPONAME"' >> $BASH_ENV
+            echo 'export CIRCLE_SHA1="$CIRCLE_SHA1"' >> $BASH_ENV
+            tools/docker_build_push.sh
+workflows:
+  version: 2
+  build-toolbox-image:
+    jobs:
+      - shellcheck
+      - build:
+          context: org-carbon
+          requires:
+            - shellcheck
