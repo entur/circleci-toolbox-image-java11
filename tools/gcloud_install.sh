@@ -7,6 +7,7 @@ wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk
 tar -xvzf google-cloud-sdk-${VER}.tar.gz
 ./google-cloud-sdk/install.sh -q
 ./google-cloud-sdk/bin/gcloud components update
+./google-cloud-sdk/bin/gcloud -q components install pubsub-emulator
 rm google-cloud-sdk-${VER}.tar.gz
 
 PATH="$(pwd)/google-cloud-sdk/bin:${PATH}"
