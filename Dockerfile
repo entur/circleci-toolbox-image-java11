@@ -45,5 +45,5 @@ RUN  npm install -g @2fd/graphdoc@2.4.0 \
  && npm install -g graphql-docs@0.2.0
 
  # Install helm
- curl -L https://git.io/get_helm.sh | bash
+ RUN curl -L https://git.io/get_helm.sh | bash
 
