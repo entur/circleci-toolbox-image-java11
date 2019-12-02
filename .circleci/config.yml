@@ -1,5 +1,10 @@
 version: 2.1
 aliases:
+- &GCP-auth
+  name: GCP Authenticate
+  command: |
+    echo 'export GCLOUD_SERVICE_KEY="$GCLOUD_SERVICE_KEY"' >> $BASH_ENV
+    /tools/gcp_authenticate.sh
 - &docker-login
   name: Docker login
   command: |
@@ -32,11 +37,9 @@ jobs:
     steps:
       - checkout
       - run: tools/gcloud_install.sh
-      - run:
-          name: GCP Authenticate
-          command: |
-            echo 'export GCLOUD_SERVICE_KEY="$GCLOUD_SERVICE_KEY"' >> $BASH_ENV
-            tools/gcp_authenticate.sh
+      - run: *GCP-auth
+      - setup_remote_docker:
+          docker_layer_caching: true
       - run: *docker-login
       - run: *docker-build-and-push
 workflows:
