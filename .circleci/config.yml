@@ -44,6 +44,6 @@ workflows:
     jobs:
       - shellcheck
       - build:
-          context: org-carbon
+          context: dev
           requires:
             - shellcheck
