@@ -40,6 +40,8 @@ RUN apt-get install -y ruby-full
 RUN  npm install -g @2fd/graphdoc@2.4.0 \
  && npm install -g graphql-docs@0.2.0
 
- # Install helm
- RUN curl -L https://git.io/get_helm.sh | bash
+# Install helm
+RUN curl -L https://git.io/get_helm.sh | bash
 
+# Install sonar-scanner
+RUN /tools/sonar_scanner_install.sh
