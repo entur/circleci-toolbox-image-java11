@@ -7,6 +7,7 @@ Docker image for building with CircleCI, sharing scripts and installed tools amo
 * java
 * maven
 * gcloud
+* sonar-scanner
 
 ## Some of the scripts provided
 * docker authentication
