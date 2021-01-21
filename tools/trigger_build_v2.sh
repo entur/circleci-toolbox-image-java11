@@ -11,8 +11,8 @@ set -euo pipefail
           git clone --single-branch --branch "$branch" "https://github.com/$repository" "$working_dir"
 
           cd ${working_dir} || exit
-          git config --global user.email "circleci@entur.no"
-          git config --global user.name "circleci"
+          git config --global user.email "circleci.service@entur.org"
+          git config --global user.name "entur-circleci"
           repo_name=${CIRCLE_PROJECT_REPONAME}
           git_hash=$(echo "$CIRCLE_SHA1" | cut -c1-7)
           repo_name_hash="${repo_name}(${git_hash})"
