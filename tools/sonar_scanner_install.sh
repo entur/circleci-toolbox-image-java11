@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-VER="4.4.0.2170"
+VER="4.7.0.2747"
 
 wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${VER}-linux.zip
 unzip sonar-scanner-cli-${VER}-linux.zip
