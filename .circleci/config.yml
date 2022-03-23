@@ -48,6 +48,6 @@ workflows:
     jobs:
       - shellcheck
       - build:
-          context: dev
+          context: global
           requires:
             - shellcheck
