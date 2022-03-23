@@ -17,7 +17,7 @@ set -euo pipefail
           git config --global user.name "circleci"
           
           git pull
-          git tag -a $DOCKER_TAG $COMMIT_ID -m "Tag from deployment config repo"
+          git tag -a "$DOCKER_TAG" "$COMMIT_ID" -m "Tag from deployment config repo"
           # Push quietly to prevent showing in log
           echo "push empty commit "
           git push -q --tags origin "$branch" 
