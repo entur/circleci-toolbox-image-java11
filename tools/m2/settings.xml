@@ -17,6 +17,11 @@
             <password>${env.JFROG_PASS}</password>
             <id>entur-mirror</id>
         </server>
+        <server>
+            <username>$SONATYPE_USERNAME</username>
+            <password>$SONATYPE_PASSWORD</password>
+            <id>ossrh</id>
+        </server>
     </servers>
     <profiles>
         <profile>
