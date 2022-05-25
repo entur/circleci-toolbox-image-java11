@@ -18,8 +18,8 @@
             <id>entur-mirror</id>
         </server>
         <server>
-            <username>$SONATYPE_USERNAME</username>
-            <password>$SONATYPE_PASSWORD</password>
+            <username>${env.SONATYPE_USERNAME}</username>
+            <password>${env.SONATYPE_PASSWORD}</password>
             <id>ossrh</id>
         </server>
     </servers>
